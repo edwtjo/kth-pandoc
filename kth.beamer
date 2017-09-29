@@ -5,6 +5,34 @@
 % 12pt by default; handout if the handout template variable is defined
 \documentclass[$if(fontsize)$$fontsize$,$else$12pt,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 
+\definecolor{KTHBlue}{RGB}{25,84,166}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+% KTH Watermark
+% pdflatex only due to a bug in pgf,tikz bundled with xetex
+% https://sourceforge.net/p/pgf/bugs/425/
+\setlength{\unitlength}{\paperwidth}
+\usebackgroundtemplate{%
+  \put(0.6,-0.9){\tikz\node[opacity=.1]{\includegraphics[scale=5]{kth-logo/kth-logga.pdf}};}}
+
+% KTH Color Settings
+\setbeamercolor*{title page header}{fg=black}
+\setbeamercolor*{author}{fg=black}
+\setbeamercolor*{date}{fg=black}
+\setbeamercolor*{frametitle}{fg=white,bg=KTHBlue}
+\setbeamercolor*{itemize item}{fg=KTHBlue}
+\setbeamercolor*{caption name}{fg=KTHBlue}
+\setbeamercolor*{description item}{fg=KTHBlue}
+\setbeamercolor*{footer}{fg=white,bg=KTHBlue}
+\setbeamercolor*{title separator}{fg=KTHBlue}
+\setbeamercolor*{progress bar in head/foot}{fg=ProcessBlue}
+\setbeamercolor*{progress bar in section page}{fg=KTHBlue}
+
+% \metroset{progressbar=foot,numbering=fraction}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
 % theme, colortheme, and fonttheme with sensible defaults
 $if(theme)$
 \usetheme{$theme$}
