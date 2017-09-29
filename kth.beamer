@@ -8,6 +8,10 @@
 \definecolor{KTHBlue}{RGB}{25,84,166}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{mtheme/beamerthememetropolis}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % KTH Watermark
 % pdflatex only due to a bug in pgf,tikz bundled with xetex
@@ -29,10 +33,6 @@
 \setbeamercolor*{progress bar in head/foot}{fg=ProcessBlue}
 \setbeamercolor*{progress bar in section page}{fg=KTHBlue}
 
-% \metroset{progressbar=foot,numbering=fraction}
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
 % theme, colortheme, and fonttheme with sensible defaults
 $if(theme)$
 \usetheme{$theme$}
@@ -47,6 +47,9 @@ $endif$
 $if(fonttheme)$
 \usefonttheme{$fonttheme$}
 $endif$
+
+\metroset{progressbar=foot,numbering=fraction}
+
 
 % if it is a handout show the notes text; otherwise don't
 $if(handout)$
