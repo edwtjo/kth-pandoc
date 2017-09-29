@@ -1,19 +1,26 @@
-SLIDES := $(patsubst %.md,%.md.slides.pdf,$(wildcard *.md))
-HANDOUTS := $(patsubst %.md,%.md.handout.pdf,$(wildcard *.md))
+.PHONY: all clean
+.SUFFIXES: .md .pdf
 
-all : $(SLIDES) $(HANDOUTS)
+include local.mk
+include subdirs.mk
 
-%.md.slides.pdf : %.md
+RM=rm -f
+
+all : $(SLIDES).slides.pdf $(HANDOUTS).handouts.pdf
+
+%.slides.pdf : %.md
 	pandoc $^ -t beamer -s --template=./kth.beamer --slide-level 2 -o $@
 
-%.md.handout.pdf : %.md
-	pandoc $^ -t beamer --slide-level 2 -V handout -o $@ 
+%.handout.pdf : %.md
+	pandoc $^ -t beamer --slide-level 2 -V handout -o $@
 	pdfnup $@ --nup 1x2 --no-landscape --keepinfo \
 		--paper letterpaper --frame true --scale 0.9 \
 		--suffix "nup"
 	mv $*.md.handout-nup.pdf $@
 
+clean: dist
+	$(RM) *.pdf
 
-clean:
-	rm -f $(SLIDES)
-	rm -f $(HANDOUTS)
+dist:
+	$(RM) *~
+
